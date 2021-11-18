@@ -3,15 +3,19 @@ const path = require('path')
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
-  // Define a template for blog post
-  const blogPost = path.resolve('./src/templates/blog-post.js')
+  const productPage = path.resolve('./src/templates/product.js')
 
   const result = await graphql(
     `
       {
-        allContentfulBlogPost {
+        allContentfulProduct {
           nodes {
-            title
+            productName {
+              productName
+            }
+            productDescription {
+              productDescription
+            }
             slug
           }
         }
@@ -27,27 +31,20 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const posts = result.data.allContentfulBlogPost.nodes
+  const products = result.data.allContentfulProduct.nodes;
+  console.log(products[0].slug);
 
-  // Create blog posts pages
-  // But only if there's at least one blog post found in Contentful
-  // `context` is available in the template as a prop and as a variable in GraphQL
-
-  if (posts.length > 0) {
-    posts.forEach((post, index) => {
-      const previousPostSlug = index === 0 ? null : posts[index - 1].slug
-      const nextPostSlug =
-        index === posts.length - 1 ? null : posts[index + 1].slug
+  if (products.length > 0) {
+    products.forEach((product, index) => {
 
       createPage({
-        path: `/blog/${post.slug}/`,
-        component: blogPost,
+        path: `/products/${product.slug}`,
+        component: productPage,
         context: {
-          slug: post.slug,
-          previousPostSlug,
-          nextPostSlug,
+          slug: product.slug,
         },
       })
     })
   }
 }
+
