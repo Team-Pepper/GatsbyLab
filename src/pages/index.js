@@ -1,6 +1,5 @@
 import React from 'react'
 import { graphql, Link } from 'gatsby'
-// import get from 'lodash/get'
 
 const RootIndex = ({ data }) => {
   return (
@@ -13,19 +12,5 @@ const RootIndex = ({ data }) => {
   )
 }
 
-// export const pageQuery = graphql`
-// query ProductQuery {
-//   allContentfulProduct {
-//     nodes {
-//       productName {
-//         productName
-//       }
-//       productDescription {
-//         productDescription
-//       }
-//     }
-//   }
-// }
-// `
 
 export default RootIndex
