@@ -11,6 +11,6 @@ const RootIndex = ({ data }) => {
     </>
   )
 }
-//helo
+
 
 export default RootIndex
