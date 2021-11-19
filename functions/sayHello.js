@@ -1,6 +1,10 @@
 exports.handler = async function(context, event) {
-  return {
-       statusCode: 200,
-       message: JSON.stringify({msg: "Hello world"})
-   }
+  try {
+    return {
+         statusCode: 200,
+         message: JSON.stringify({msg: "Hello world"})
+    }
+  } catch (error) {
+    console.log(error)
+  }
 }
